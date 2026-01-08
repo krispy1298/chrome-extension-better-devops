@@ -17,7 +17,7 @@ jobs:
           node-version: 20
       - uses: vimtor/action-zip@v1.2
         with:
-          files: src/**
+          files: src/*
           recursive: false
           dest: result.zip
       - name: Upload & release
