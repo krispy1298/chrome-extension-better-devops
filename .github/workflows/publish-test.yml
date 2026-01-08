@@ -15,11 +15,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Build project
+        run: npm run build
       - name: Compress Directory
         uses: somaz94/compress-decompress@v1
         with:
           command: compress
-          source: "src/**"
+          source: "dist/**"
           format: zip
           destfilename: "result"
       - name: Upload & release

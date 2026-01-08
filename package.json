@@ -1,0 +1,24 @@
+{
+  "name": "chrome-extension-better-devops",
+  "version": "1.0.0",
+  "description": "A Chrome Extension to have a better experience in MS DevOps",
+  "main": "gulpfile.js",
+  "scripts": {
+    "build": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krispy1298/chrome-extension-better-devops.git"
+  },
+  "author": "hello@kamilkecki.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krispy1298/chrome-extension-better-devops/issues"
+  },
+  "homepage": "https://github.com/krispy1298/chrome-extension-better-devops#readme",
+  "dependencies": {
+    "gulp": "^5.0.1",
+    "gulp-scss": "^1.4.0"
+  }
+}
