@@ -1,7 +1,13 @@
 import { src, dest, series } from "gulp";
-import scss from "gulp-scss";
+import * as dartSass from "sass";
+import gulpSass from "gulp-sass";
+const sass = gulpSass(dartSass);
 
-const styles = src("src/style.scss").pipe(scss()).pipe(dest("dist/"));
-const copy = src("src/manifest.json").pipe(dest("dist/"));
+const styles = () =>
+  src("src/style.scss")
+    .pipe(sass().on("error", sass.logError))
+    .pipe(dest("dist/"));
+
+const copy = () => src("src/manifest.json").pipe(dest("dist/"));
 
 export const build = series(styles, copy);
