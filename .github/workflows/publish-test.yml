@@ -26,11 +26,12 @@ jobs:
           command: compress
           source: "dist/**"
           format: zip
+          dest: "./output"
           destfilename: "result"
       - name: Upload & release
         uses: mnao305/chrome-extension-upload@v5.0.0
         with:
-          file-path: ${{ steps.compress.outputs.file_path }}/result.zip
+          file-path: ./output/result.zip
           extension-id: ecaemhhchglhijbcodpjfcjmccfhbkhh
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
