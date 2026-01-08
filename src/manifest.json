@@ -1,0 +1,12 @@
+{
+  "name": "Better DevOps Extension",
+  "version": "1.0",
+  "manifest_version": 3,
+  "description": "A Chrome Extension to have a better experience in MS DevOps",
+  "content_scripts": [
+    {
+      "matches": ["https://*.visualstudio.com/*"],
+      "css": ["style.css"]
+    }
+  ]
+}

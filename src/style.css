@@ -1,0 +1,32 @@
+.ms-vss-web-vsts-theme-dark .bolt-callout {
+  background-color: color-mix(
+    in srgb,
+    var(--background-color) 90%,
+    transparent 10%
+  );
+}
+
+.work-item-form-header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.workitemcontrol-label {
+  font-weight: bold;
+  opacity: 0.9;
+}
+
+.work-item-form-control-wrapper {
+  margin-bottom: 12px;
+}
+
+html .work-item-form-control,
+html .work-item-form-control-content {
+  width: calc(100% + 4px);
+  margin-left: -2px;
+  margin-right: -2px;
+}
+
+html .work-item-form-collapsible-header {
+  padding-left: 8px;
+  padding-right: 8px;
+}
