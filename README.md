@@ -1,4 +1,4 @@
-# Chrome Extension Azure Boards
+# Better Azure Boards Chrome Extension
 
 A Chrome extension to enhance your Azure Boards workflow and productivity.
 
