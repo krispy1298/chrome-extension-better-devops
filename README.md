@@ -1,11 +1,10 @@
-# Chrome Extension Better DevOps
+# Chrome Extension Azure Boards
 
-A Chrome extension to enhance your DevOps workflow and productivity.
+A Chrome extension to enhance your Azure Boards workflow and productivity.
 
 ## Features
 
-- Improves DevOps-related workflows in the browser
-- Streamlines common development operations tasks
+- Improves layout and readability
 - Easy to install and use
 
 ## Installation
