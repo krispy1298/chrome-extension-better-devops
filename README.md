@@ -15,11 +15,13 @@ A Chrome extension to enhance your Azure Boards workflow and productivity.
    git clone https://github.com/krispy1298/chrome-extension-better-devops.git
    ```
 
-2. Open Chrome and navigate to `chrome://extensions/`
+2. Run `npm i && npm run build`
 
-3. Enable "Developer mode" in the top right corner
+3. Open Chrome and navigate to `chrome://extensions/`
 
-4. Click "Load unpacked" and select the extension directory
+4. Enable "Developer mode" in the top right corner
+
+5. Click "Load unpacked" and select the `/dist` folder
 
 ## Usage
 
@@ -30,8 +32,9 @@ After installation, the extension will be available in your Chrome toolbar. Clic
 To contribute or modify this extension:
 
 1. Make your changes to the source files
-2. Reload the extension in `chrome://extensions/`
-3. Test your changes thoroughly
+2. Run `npm run build`
+3. Reload the extension in `chrome://extensions/`
+4. Test your changes thoroughly
 
 ## Contributing
 
