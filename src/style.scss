@@ -13,7 +13,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-.workitemcontrol-label {
+.workitemcontrol-label,
+.link-type-name {
   font-weight: bold;
   opacity: 0.9;
 }
@@ -33,5 +34,28 @@ html {
   .work-item-form-collapsible-header {
     padding-left: 8px;
     padding-right: 8px;
+    margin-bottom: 12px;
+  }
+
+  .compact-links-list {
+    .link-type-group {
+      margin-top: 12px;
+    }
+    .link-type-name {
+      margin-top: 18px;
+    }
+
+    .removable-item-container {
+      margin-bottom: 8px;
+    }
+  }
+
+  .bolt-button.subtle {
+    background-color: var(--palette-black-alpha-2, rgba(0, 0, 0, 0.02));
+    border-color: var(--palette-black-alpha-6, rgba(0, 0, 0, 0.06));
+  }
+
+  .no-padding.bolt-button {
+    padding: 3px 6px !important;
   }
 }
