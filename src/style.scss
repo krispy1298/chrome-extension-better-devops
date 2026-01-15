@@ -45,8 +45,34 @@ html {
       margin-top: 18px;
     }
 
-    .removable-item-container {
+    .artifact-link-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      border: var(--palette-black-alpha-6, rgba(0, 0, 0, 0.06)) 1px solid;
+      padding: 4px;
       margin-bottom: 8px;
+      border-radius: 4px;
+      min-height: 50px;
+    }
+
+    .remove-item-button-container {
+      background: linear-gradient(
+        to right,
+        transparent 0%,
+        var(--background-color, rgba(255, 255, 255, 1)) 50%,
+        var(--background-color, rgba(255, 255, 255, 1)) 100%
+      );
+
+      top: 1px !important;
+      bottom: 1px !important;
+      right: 1px !important;
+      border-radius: 4px;
+      overflow: hidden;
+
+      .bolt-button {
+        background-color: var(--background-color, rgba(255, 255, 255, 1));
+      }
     }
   }
 
