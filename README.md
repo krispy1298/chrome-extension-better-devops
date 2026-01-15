@@ -46,4 +46,5 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-For issues or feature requests, please use the [GitHub issue tracker](https://github.com/krispy1298/chrome-extension-better-devops/issues).
+For feature requests, please use this [GitHub project](https://github.com/users/krispy1298/projects/2).
+For issues, please use the [GitHub issue tracker](https://github.com/krispy1298/chrome-extension-better-devops/issues).
