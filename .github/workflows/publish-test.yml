@@ -1,11 +1,8 @@
 name: Publish to Trusted Testers
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - src/**
+  release:
+    types: [published]
 
 jobs:
   build:
