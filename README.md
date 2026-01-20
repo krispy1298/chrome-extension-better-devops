@@ -7,6 +7,10 @@ A Chrome extension to enhance your Azure Boards workflow and productivity.
 - Improves layout and readability
 - Easy to install and use
 
+## Add to Your Chrome
+
+[![Add to Chrome](https://chromewebstore.google.com/detail/better-azure-boards/ecaemhhchglhijbcodpjfcjmccfhbkhh)](https://developer.chrome.com/static/docs/webstore/branding/image/UV4C4ybeBTsZt43U4xis.png)
+
 ## Developer Installation
 
 1. Clone this repository:
