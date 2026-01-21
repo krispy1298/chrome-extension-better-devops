@@ -7,7 +7,7 @@ function autoSave() {
   }
 
   const toggle = document.querySelector(
-    "[aria-label='More save options'].enabled"
+    "[aria-label='More save options'].enabled",
   );
 
   if (toggle) {
@@ -24,13 +24,16 @@ const mutationObserver = new MutationObserver(() => {
 function setAutoSaveStatus() {
   const saveInterval = 500; // Save every .5 seconds
   setInterval(() => {
-    const status = document.getElementById("__bolt-Stat-e-input");
-    if (status) {
-      mutationObserver.observe(status, {
+    const elements = document.querySelectorAll(
+      "#__bolt-Stat-e-input:not(.better-autosave), .bolt-dropdown-expandable-textfield-input:not(.better-autosave)",
+    );
+    elements.forEach((elem) => {
+      elem.classList.add("better-autosave");
+      mutationObserver.observe(elem, {
         attributes: true,
         attributeFilter: ["value"],
       });
-    }
+    });
   }, saveInterval);
 }
 
