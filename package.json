@@ -1,6 +1,6 @@
 {
   "name": "chrome-extension-better-devops",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A Chrome Extension to have a better experience in MS DevOps",
   "main": "gulpfile.js",
   "type": "module",
