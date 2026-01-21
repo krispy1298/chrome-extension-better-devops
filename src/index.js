@@ -21,20 +21,32 @@ const mutationObserver = new MutationObserver(() => {
   autoSave();
 });
 
-function setAutoSaveStatus() {
-  const saveInterval = 1000;
-  setInterval(() => {
-    const elements = document.querySelectorAll(
-      "#__bolt-Stat-e-input:not(.better-autosave), .bolt-dropdown-expandable-textfield-input:not(.better-autosave), #__bolt-Remaining-Work-input:not(.better-autosave)",
-    );
-    elements.forEach((elem) => {
-      elem.classList.add("better-autosave");
-      mutationObserver.observe(elem, {
-        attributes: true,
-        attributeFilter: ["value"],
-      });
+function setAutoSave() {
+  const elements = document.querySelectorAll(
+    "#__bolt-Stat-e-input:not(.better-autosave), .bolt-dropdown-expandable-textfield-input:not(.better-autosave), #__bolt-Remaining-Work-input:not(.better-autosave)",
+  );
+  elements.forEach((elem) => {
+    elem.classList.add("better-autosave");
+    mutationObserver.observe(elem, {
+      attributes: true,
+      attributeFilter: ["value"],
     });
-  }, saveInterval);
+  });
+}
+
+const portalMutationObserver = new MutationObserver(() => {
+  setAutoSave();
+});
+
+function checkForPortalHost() {
+  const portalHost = document.querySelector(".bolt-portal-host");
+  if (portalHost && !portalHost.classList.contains("better-portal-host")) {
+    portalHost.classList.add("better-portal-host");
+    portalMutationObserver.observe(portalHost, {
+      childList: true,
+      subtree: true,
+    });
+  }
 }
 
 const tableMutationObserver = new MutationObserver((mutations) => {
@@ -69,8 +81,6 @@ function betterCardStatus(target) {
   });
 }
 
-setAutoSaveStatus();
-
 setInterval(() => {
   checkForTables();
 }, 2000);
@@ -78,9 +88,11 @@ setInterval(() => {
 checkForTables();
 
 document.addEventListener("DOMContentLoaded", () => {
+  checkForPortalHost();
   checkForTables();
 });
 
 window.addEventListener("load", () => {
+  checkForPortalHost();
   checkForTables();
 });
