@@ -97,3 +97,32 @@ html {
     padding: 3px 6px !important;
   }
 }
+
+.taskboard-card {
+  .title .title-text {
+    display: block;
+    font-weight: 600;
+    margin-top: 8px;
+  }
+}
+
+.better-card-state.wit-card {
+  .work-item-state-circle {
+    display: none;
+  }
+
+  .work-item-state-name {
+    font-weight: bold;
+    // color: var(--palette-black-alpha-100);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 0.65rem;
+  }
+
+  .card-work-item-state {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+    margin-top: 6px;
+    margin-bottom: 8px;
+  }
+}

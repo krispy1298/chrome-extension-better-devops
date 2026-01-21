@@ -37,4 +37,50 @@ function setAutoSaveStatus() {
   }, saveInterval);
 }
 
+const tableMutationObserver = new MutationObserver((mutations) => {
+  mutations.forEach((mutation) => {
+    if (mutation.target.classList.contains("taskboard-card")) {
+      betterCardStatus(mutation.target.parentElement);
+    }
+  });
+});
+
+function checkForTables() {
+  const tables = document.querySelectorAll(".bolt-table:not(.better-table)");
+  tables.forEach((table) => {
+    table.classList.add("better-table");
+    betterCardStatus(table);
+    tableMutationObserver.observe(table, {
+      childList: true,
+      subtree: true,
+    });
+  });
+}
+
+function betterCardStatus(target) {
+  const cards = target.querySelectorAll(
+    ".taskboard-card:not(.better-card-state)",
+  );
+  cards.forEach((card) => {
+    card.classList.add("better-card-state");
+    const circle = card.querySelector(".work-item-state-circle");
+    const state = circle.closest(".card-work-item-state");
+    state.setAttribute("style", circle.getAttribute("style"));
+  });
+}
+
 setAutoSaveStatus();
+
+setInterval(() => {
+  checkForTables();
+}, 2000);
+
+checkForTables();
+
+document.addEventListener("DOMContentLoaded", () => {
+  checkForTables();
+});
+
+window.addEventListener("load", () => {
+  checkForTables();
+});
