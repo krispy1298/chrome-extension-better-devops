@@ -22,7 +22,7 @@ const mutationObserver = new MutationObserver(() => {
 });
 
 function setAutoSaveStatus() {
-  const saveInterval = 500; // Save every .5 seconds
+  const saveInterval = 1000;
   setInterval(() => {
     const elements = document.querySelectorAll(
       "#__bolt-Stat-e-input:not(.better-autosave), .bolt-dropdown-expandable-textfield-input:not(.better-autosave), #__bolt-Remaining-Work-input:not(.better-autosave)",
