@@ -1,6 +1,10 @@
 function autoSave() {
   const button = document.getElementById("__bolt-save-dialog");
 
+  if (!button) {
+    return;
+  }
+
   if (button.innerText === "Save") {
     button.click();
     return;
@@ -34,19 +38,24 @@ function setAutoSave() {
   });
 }
 
-const portalMutationObserver = new MutationObserver(() => {
+const workFormMutationObserver = new MutationObserver(() => {
   setAutoSave();
 });
 
-function checkForPortalHost() {
-  const portalHost = document.querySelector(".bolt-portal-host");
-  if (portalHost && !portalHost.classList.contains("better-portal-host")) {
-    portalHost.classList.add("better-portal-host");
-    portalMutationObserver.observe(portalHost, {
-      childList: true,
-      subtree: true,
-    });
-  }
+function checkForWorkForm() {
+  const workForms = document.querySelectorAll(
+    ".bolt-portal-host, .work-item-form-expanded-section-container",
+  );
+
+  workForms.forEach((form) => {
+    if (!form.classList.contains("better-portal-host")) {
+      form.classList.add("better-portal-host");
+      workFormMutationObserver.observe(form, {
+        childList: true,
+        subtree: true,
+      });
+    }
+  });
 }
 
 const tableMutationObserver = new MutationObserver((mutations) => {
@@ -70,6 +79,11 @@ function checkForTables() {
 }
 
 function betterCardStatus(target) {
+  if (!target) {
+    console.debug("No target for betterCardStatus");
+    debugger;
+    return;
+  }
   const cards = target.querySelectorAll(
     ".taskboard-card:not(.better-card-state)",
   );
@@ -88,11 +102,11 @@ setInterval(() => {
 checkForTables();
 
 document.addEventListener("DOMContentLoaded", () => {
-  checkForPortalHost();
+  checkForWorkForm();
   checkForTables();
 });
 
 window.addEventListener("load", () => {
-  checkForPortalHost();
+  checkForWorkForm();
   checkForTables();
 });
