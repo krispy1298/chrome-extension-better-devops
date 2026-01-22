@@ -11,8 +11,10 @@ const sass = gulpSass(dartSass);
 
 const styles = () =>
   src("src/style.scss")
+    .pipe(sourcemaps.init())
     .pipe(sass().on("error", sass.logError))
     .pipe(cssnano())
+    .pipe(sourcemaps.write("."))
     .pipe(dest("dist/"));
 
 const copy = () => src("src/manifest.json").pipe(dest("dist/"));
