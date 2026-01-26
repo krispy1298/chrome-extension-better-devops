@@ -126,3 +126,25 @@ html {
     margin-bottom: 8px;
   }
 }
+
+.better-parent-link {
+  &,
+  + div {
+    display: inline-block;
+    min-height: 2.8em;
+    align-content: center;
+  }
+  .artifact-link {
+    &::after {
+      content: "\00A0\00A0\00A0/\00A0\00A0\00A0";
+    }
+  }
+}
+
+.work-item-form-header {
+  > div + div,
+  .work-item-title-textfield,
+  .work-item-title-textfield input {
+    font-weight: bold;
+  }
+}

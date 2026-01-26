@@ -21,9 +21,30 @@ function autoSave() {
   });
 }
 
+function betterParentLink(target = document) {
+  target.querySelectorAll(".link-type-name").forEach((elem) => {
+    if (elem.innerText === "Parent") {
+      const parent = elem.parentElement.querySelector(
+        ".link-type-links .artifact-link-container",
+      );
+      console.debug("Found parent link:", parent);
+      const header = elem
+        .closest(".work-item-form-dialog, .work-item-form-page")
+        ?.querySelector(".work-item-form-header");
+      if (parent && header && !header.querySelector(".better-parent-link")) {
+        const linkClone = parent.cloneNode(true);
+        linkClone.querySelector(".artifact-details")?.remove();
+        linkClone.querySelector(".remove-item-button-container")?.remove();
+        linkClone.classList.add("better-parent-link");
+        linkClone.classList.remove("padding-bottom-8");
+        linkClone.style.maxWidth = "30%";
+        header.querySelector(".secondary-text").prepend(linkClone);
+      }
+    }
+  });
 }
 
-const mutationObserver = new MutationObserver(() => {
+const cardMutationObserver = new MutationObserver(() => {
   autoSave();
 });
 
@@ -33,25 +54,43 @@ function setAutoSave() {
   );
   elements.forEach((elem) => {
     elem.classList.add("better-autosave");
-    mutationObserver.observe(elem, {
+    cardMutationObserver.observe(elem, {
       attributes: true,
       attributeFilter: ["value"],
     });
   });
 }
 
-const workFormMutationObserver = new MutationObserver(() => {
+const workFormMutationObserver = new MutationObserver((mutations) => {
   setAutoSave();
+  mutations.forEach((mutation) => {
+    if (
+      mutation.target.classList.contains("bolt-portal-host") ||
+      mutation.target.classList.contains("region-page")
+    ) {
+      workFormMutationObserver.observe(mutation.target, {
+        childList: true,
+        subtree: true,
+      });
+    }
+    betterParentLink(mutation.target);
+  });
 });
 
 function checkForWorkForm() {
   const workForms = document.querySelectorAll(
-    ".bolt-portal-host, .work-item-form-expanded-section-container",
+    ".bolt-portal-host, .work-item-form-expanded-section-container, .work-item-form-page, .region-page",
   );
+
+  workFormMutationObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
 
   workForms.forEach((form) => {
     if (!form.classList.contains("better-portal-host")) {
       form.classList.add("better-portal-host");
+      betterParentLink(form);
       workFormMutationObserver.observe(form, {
         childList: true,
         subtree: true,
