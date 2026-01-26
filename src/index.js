@@ -1,24 +1,26 @@
 function autoSave() {
-  const button = document.getElementById("__bolt-save-dialog");
-
-  if (!button) {
-    return;
-  }
-
-  if (button.innerText === "Save") {
-    button.click();
-    return;
-  }
-
-  const toggle = document.querySelector(
-    "[aria-label='More save options'].enabled",
+  const buttons = document.querySelectorAll(
+    "#__bolt-save-dialog, #__bolt-save",
   );
 
-  if (toggle) {
-    toggle.click();
-    const save = document.getElementById("__bolt-save");
-    save.click();
-  }
+  buttons.forEach((button) => {
+    if (button.innerText === "Save") {
+      button.click();
+      return;
+    }
+
+    const toggle = document.querySelector(
+      "[aria-label='More save options'].enabled",
+    );
+
+    if (toggle) {
+      toggle.click();
+      const save = document.getElementById("__bolt-save");
+      save.click();
+    }
+  });
+}
+
 }
 
 const mutationObserver = new MutationObserver(() => {
