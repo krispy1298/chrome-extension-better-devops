@@ -1,6 +1,6 @@
 {
   "name": "Better Azure Boards",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "manifest_version": 3,
   "description": "A Chrome Extension to have a better experience in Azure Boards",
   "content_scripts": [
