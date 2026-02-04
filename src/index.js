@@ -44,19 +44,46 @@ function betterParentLink(target = document) {
   });
 }
 
-const cardMutationObserver = new MutationObserver(() => {
-  autoSave();
+const cardFieldMutationObserver = new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
+    if (
+      mutation.target.classList.contains("rooster-editor") &&
+      mutation.attributeName === "class" &&
+      !mutation.target.classList.contains("edit-mode")
+    ) {
+      autoSave();
+    } else if (["value", "aria-rowcount"].includes(mutation.attributeName)) {
+      autoSave();
+    }
+  }
 });
 
 function setAutoSave() {
-  const elements = document.querySelectorAll(
-    "#__bolt-Stat-e-input:not(.better-autosave), .bolt-dropdown-expandable-textfield-input:not(.better-autosave), #__bolt-Remaining-Work-input:not(.better-autosave)",
+  const containers = document.querySelectorAll(
+    ".work-item-form-dialog,.work-item-form-page",
   );
-  elements.forEach((elem) => {
-    elem.classList.add("better-autosave");
-    cardMutationObserver.observe(elem, {
-      attributes: true,
-      attributeFilter: ["value"],
+
+  containers.forEach((container) => {
+    const elements = container.querySelectorAll(
+      "#__bolt-Stat-e-input:not(.better-autosave), .bolt-dropdown-expandable-textfield-input:not(.better-autosave), .rooster-editor:not(.better-autosave), .work-item-attachments-grid:not(.better-autosave)",
+    );
+    elements.forEach((elem) => {
+      elem.classList.add("better-autosave");
+      cardFieldMutationObserver.observe(elem, {
+        attributes: true,
+        attributeFilter: ["value", "class", "aria-rowcount"],
+      });
+    });
+
+    const textFields = container.querySelectorAll(
+      ".bolt-textfield-input:not(.better-autosave)",
+    );
+
+    textFields.forEach((field) => {
+      field.classList.add("better-autosave");
+      field.addEventListener("blur", () => {
+        autoSave();
+      });
     });
   });
 }
