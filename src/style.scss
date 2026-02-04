@@ -88,14 +88,24 @@ html {
       }
     }
   }
-
-  .bolt-button.subtle {
+  .work-item-form-control-wrapper .bolt-button.subtle {
     background-color: var(--palette-black-alpha-2, rgba(0, 0, 0, 0.02));
     border-color: var(--palette-black-alpha-6, rgba(0, 0, 0, 0.06));
   }
 
   .no-padding.bolt-button {
     padding: 3px 6px !important;
+  }
+
+  .bolt-button[better-autosaved] {
+    transition: background-color 0.5s ease;
+    background-color: var(
+      --palette-green-alpha-20,
+      rgba(0, 128, 0, 0.2)
+    ) !important;
+    &:after {
+      content: "d ✓";
+    }
   }
 }
 
