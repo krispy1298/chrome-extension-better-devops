@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Autosave for more text-based fields
 - Feedback for autosave
 
-  ### Fixed
+### Fixed
 
 - Issue [#1](https://github.com/krispy1298/chrome-extension-better-devops/issues/1)
 
@@ -22,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Show parent next to current item name
 
-  ### Fixed
+### Fixed
 
 - Auto save feature didn't work on non-dialog window version
 
