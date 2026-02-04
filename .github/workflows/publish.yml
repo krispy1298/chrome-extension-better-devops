@@ -3,6 +3,7 @@ name: Publish Chrome Extension
 on:
   release:
     types: [published]
+  workflow_dispatch: 
 
 jobs:
   build:
