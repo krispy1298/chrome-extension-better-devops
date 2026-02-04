@@ -6,6 +6,10 @@ function autoSave() {
   buttons.forEach((button) => {
     if (button.innerText === "Save") {
       button.click();
+      button.setAttribute("better-autosaved", "");
+      setTimeout(() => {
+        button.removeAttribute("better-autosaved");
+      }, 1500);
       return;
     }
 
