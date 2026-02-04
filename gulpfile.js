@@ -1,4 +1,4 @@
-import { src, dest, series } from "gulp";
+import { src, dest, series, watch } from "gulp";
 import * as dartSass from "sass";
 import gulpSass from "gulp-sass";
 import cssnano from "gulp-cssnano";
@@ -6,6 +6,8 @@ import { rollup } from "gulp-rollup-2";
 import strip from "@rollup/plugin-strip";
 import { minify } from "rollup-plugin-esbuild-minify";
 import sourcemaps from "gulp-sourcemaps";
+import commonjs from "@rollup/plugin-commonjs";
+import { nodeResolve } from "@rollup/plugin-node-resolve";
 
 const sass = gulpSass(dartSass);
 
@@ -24,8 +26,13 @@ const js = () =>
     .pipe(sourcemaps.init())
     .pipe(
       rollup({
-        plugins:
-          process.env.BUILD_MODE == "production" ? [strip(), minify()] : [],
+        plugins: [
+          nodeResolve(),
+          commonjs(),
+          ...(process.env.BUILD_MODE == "production"
+            ? [strip(), minify()]
+            : []),
+        ],
         cache: true,
         output: {
           file: "index.js",
@@ -38,3 +45,5 @@ const js = () =>
     .pipe(dest("dist"));
 
 export const build = series(styles, copy, js);
+
+export default () => watch("src/**/*", build);
