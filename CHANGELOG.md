@@ -5,6 +5,17 @@ All notable changes to the Better Azure Boards Chrome Extension will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2026-01-26
+
+### Added
+
+- Autosave for more text-based fields
+- Feedback for autosave
+
+  ### Fixed
+
+- Issue [#1](https://github.com/krispy1298/chrome-extension-better-devops/issues/1)
+
 ## [1.0.4] - 2026-01-26
 
 ### Added
