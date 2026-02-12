@@ -53,7 +53,8 @@ const cardFieldMutationObserver = new MutationObserver((mutations) => {
     if (
       mutation.target.classList.contains("rooster-editor") &&
       mutation.attributeName === "class" &&
-      !mutation.target.classList.contains("edit-mode")
+      !mutation.target.classList.contains("edit-mode") &&
+      !mutation.target.closest(".work-item-form-discussion")
     ) {
       autoSave();
     } else if (["value", "aria-rowcount"].includes(mutation.attributeName)) {
@@ -71,8 +72,14 @@ function setAutoSave() {
     const elements = container.querySelectorAll(
       "#__bolt-Stat-e-input:not(.better-autosave), .bolt-dropdown-expandable-textfield-input:not(.better-autosave), .rooster-editor:not(.better-autosave), .work-item-attachments-grid:not(.better-autosave)",
     );
+
     elements.forEach((elem) => {
       elem.classList.add("better-autosave");
+
+      if (elem.closest(".work-item-form-discussion")) {
+        return;
+      }
+
       cardFieldMutationObserver.observe(elem, {
         attributes: true,
         attributeFilter: ["value", "class", "aria-rowcount"],
@@ -162,7 +169,19 @@ function betterCardStatus(target) {
   cards.forEach((card) => {
     card.classList.add("better-card-state");
     const circle = card.querySelector(".work-item-state-circle");
+
+    if (!circle) {
+      console.debug("No circle found for card:", card);
+      return;
+    }
+
     const state = circle.closest(".card-work-item-state");
+
+    if (!state) {
+      console.debug("No state element found for circle:", circle);
+      return;
+    }
+
     state.setAttribute("style", circle.getAttribute("style"));
   });
 }
