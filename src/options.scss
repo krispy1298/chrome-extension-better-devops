@@ -1,0 +1,32 @@
+$enable-cssgrid: true;
+
+$primary: #10b1e1;
+
+$font-family-base:
+  "Helvetica Neue",
+  Helvetica Arial,
+  sans-serif;
+
+:root {
+  --bs-border-width: 1px;
+}
+
+@import "./../node_modules/bootstrap/scss/bootstrap-reboot.scss";
+@import "./../node_modules/bootstrap/scss/bootstrap.scss";
+
+html,
+body {
+  border: none !important;
+  background-color: black;
+  min-height: 100svh;
+}
+
+.form-check {
+  display: block;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.list-group {
+  --bs-list-group-border-width: var(--bs-border-width);
+}

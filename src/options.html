@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Better Azure Boards Options</title>
+  <link rel="stylesheet" href="./options.css" />
+</head>
+
+<body data-bs-theme="dark">
+  <div class="grid">
+    <div class="g-col-lg-3"></div>
+    <div class="g-col-12 g-col-lg-6 p-4">
+      <h1 class="h3">Better Azure Boards</h1>
+      <div id='content' class='fade'>
+        <div class='border border-secondary rounded p-4 bg-dark mt-4'>
+          <h2 class="h5 mb-4">Options</h2>
+
+          <form class="form">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" value="" id="darkenModalOverlays">
+              <label class="form-check-label" for="darkenModalOverlays">
+                Darken modal overlays to make modals more prominent
+              </label>
+            </div>
+
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" value="" id="closeModalByClickingOutside">
+              <label class="form-check-label" for="closeModalByClickingOutside">
+                Close a modal when its overlay is clicked
+              </label>
+            </div>
+
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" value="" id="autoSave">
+              <label class="form-check-label" for="autoSave">
+                Enable auto-save for supported fields
+              </label>
+            </div>
+
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" value="" id="noScrollBarOnTextAreas">
+              <label class="form-check-label" for="noScrollBarOnTextAreas">
+                Expose the full content of text areas and remove its scrollbars
+                <small class="text-body-secondary d-block">
+                  (e.g. work item description)
+                </small>
+              </label>
+            </div>
+
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" value="" id="showParentAsBreadcrumbs">
+              <label class="form-check-label" for="showParentAsBreadcrumbs">
+                Show parent work item as breadcrumbs above the title of the child work item
+                <small class="text-body-secondary d-block">
+                  (e.g. 1234 Parent > 2345 Child)
+                </small>
+              </label>
+            </div>
+
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" value="" id="moreProminentStateOnCards">
+              <label class="form-check-label" for="moreProminentStateOnCards">
+                Make work items&#8217; state more prominent on cards
+              </label>
+            </div>
+
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" value="" id="copyNumberToClipboard">
+              <label class="form-check-label" for="copyNumberToClipboard">
+                Make the work item&#8217;s number copy to clipboard when clicked
+                <small class="text-body-secondary d-block">
+                  (where supported)
+                </small>
+              </label>
+            </div>
+
+            <div id="status"></div>
+            <button class="btn btn-primary mt-4" id="save" type="button">Save</button>
+          </form>
+        </div>
+
+        <div class='border border-secondary rounded p-4 bg-dark mt-4'>
+          <h2 class="h5 mb-4">Info</h2>
+
+          <div class="list-group">
+            <a href="https://github.com/krispy1298/chrome-extension-better-devops/blob/main/CHANGELOG.md"
+              target="_blank" class="list-group-item list-group-item-action list-group-item-secondary">
+              <span class="d-inline-block me-2">&#128466;&#65039;</span> Changelog
+            </a>
+
+            <a href="https://github.com/krispy1298/chrome-extension-better-devops/issues" target="_blank"
+              class="list-group-item list-group-item-action list-group-item-secondary">
+              <span class="d-inline-block me-2">&#128027;</span> Submit an Issue
+            </a>
+
+            <a href="https://github.com/users/krispy1298/projects/2/views/1" target="_blank"
+              class="list-group-item list-group-item-action list-group-item-secondary">
+              <span class="d-inline-block me-2">&#128161;</span> Submit a Feature Request
+            </a>
+
+            <a href="https://buymeacoffee.com/krispy1298" target="_blank"
+              class="list-group-item list-group-item-action list-group-item-secondary">
+              <span class="d-inline-block me-2">&#128591;</span> Support the Project by Donating
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+  <div class="toast-container p-3 bottom-0 start-50 translate-middle-x">
+    <div id="success-toast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          Settings saved!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./options.js"></script>
+</body>
+
+</html>
