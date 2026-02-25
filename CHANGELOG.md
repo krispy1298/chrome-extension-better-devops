@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- New Options Page!
+- Added options page with toggleable features and settings UI
 - Close a modal when its overlay is clicked
 - Expose the full content of text areas and remove its scrollbars
 - Make the work item’s number copy to clipboard when clicked

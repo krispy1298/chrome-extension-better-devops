@@ -237,9 +237,10 @@ class BetterAzureBoards {
     infoBox.addEventListener("click", () =>
       infoBox.classList.toggle("bab-info-box--mini"),
     );
-    infoBox
-      .querySelector("#bab-go-to-options")
-      .addEventListener("click", () => this.openOptionsPage());
+    const optionsButton = infoBox.querySelector("#bab-go-to-options");
+    if (optionsButton) {
+      optionsButton.addEventListener("click", () => this.openOptionsPage());
+    }
     document.body.appendChild(infoBox);
 
     setTimeout(() => {
