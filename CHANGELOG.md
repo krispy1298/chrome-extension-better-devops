@@ -5,6 +5,15 @@ All notable changes to the Better Azure Boards Chrome Extension will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-02-25
+
+### Added
+
+- New Options Page!
+- Close a modal when its overlay is clicked
+- Expose the full content of text areas and remove its scrollbars
+- Make the work item’s number copy to clipboard when clicked
+
 ## [1.0.6] - 2026-02-11
 
 ### Fixed
