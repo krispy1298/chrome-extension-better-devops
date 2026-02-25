@@ -10,6 +10,7 @@ import gulpSass from "gulp-sass";
 import replace from "@rollup/plugin-replace";
 import sourcemaps from "gulp-sourcemaps";
 import strip from "@rollup/plugin-strip";
+import markdown from "@wcj/markdown-to-html";
 
 const sass = gulpSass(dartSass);
 
@@ -51,7 +52,10 @@ const copy = () =>
       ),
     )
     .pipe(
-      gulpReplace("process.env.UPDATE_NOTES", process.env.UPDATE_NOTES || ""),
+      gulpReplace(
+        "process.env.UPDATE_NOTES",
+        markdown(process.env.UPDATE_NOTES || ""),
+      ),
     )
     .pipe(dest("dist/"));
 
