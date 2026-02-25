@@ -3,12 +3,15 @@ name: Publish Chrome Extension
 on:
   release:
     types: [published]
-  workflow_dispatch: 
 
 jobs:
   build:
     name: Publish webextension
     runs-on: ubuntu-latest
+    env:
+      NODE_ENV: production
+      VERSION_NUMBER: ${{ github.event.release.tag_name }}
+      UPDATE_NOTES: ${{ github.event.release.body }}
 
     steps:
       - uses: actions/checkout@v1
@@ -32,9 +35,20 @@ jobs:
           destfilename: "result"
       - name: Upload & release
         uses: mnao305/chrome-extension-upload@v5.0.0
+        if: ${{ github.event.release.prerelease == false }}
         with:
           file-path: ./output/result.zip
           extension-id: ecaemhhchglhijbcodpjfcjmccfhbkhh
           client-id: ${{ secrets.CLIENT_ID }}
           client-secret: ${{ secrets.CLIENT_SECRET }}
           refresh-token: ${{ secrets.REFRESH_TOKEN }}
+      - name: Upload & pre-release
+        uses: mnao305/chrome-extension-upload@v5.0.0
+        if: ${{ github.event.release.prerelease == true }}
+        with:
+          file-path: ./output/result.zip
+          extension-id: ecaemhhchglhijbcodpjfcjmccfhbkhh
+          client-id: ${{ secrets.CLIENT_ID }}
+          client-secret: ${{ secrets.CLIENT_SECRET }}
+          refresh-token: ${{ secrets.REFRESH_TOKEN }}
+          publish-target: trustedTesters
