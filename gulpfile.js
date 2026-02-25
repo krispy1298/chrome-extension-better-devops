@@ -46,12 +46,12 @@ const copy = () =>
   src("src/{manifest.json,*.html}")
     .pipe(
       gulpReplace(
-        "process.ENV.VERSION_NUMBER",
-        process.ENV.VERSION_NUMBER || process.env.npm_package_version,
+        "process.env.VERSION_NUMBER",
+        process.env.VERSION_NUMBER || process.env.npm_package_version,
       ),
     )
     .pipe(
-      gulpReplace("process.ENV.UPDATE_NOTES", process.ENV.UPDATE_NOTES || ""),
+      gulpReplace("process.env.UPDATE_NOTES", process.env.UPDATE_NOTES || ""),
     )
     .pipe(dest("dist/"));
 
