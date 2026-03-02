@@ -17,5 +17,5 @@
     "service_worker": "service-worker.js"
   },
   "options_page": "options.html",
-  "permissions": ["storage", "tabs"]
+  "permissions": ["storage"]
 }
