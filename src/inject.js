@@ -1,4 +1,4 @@
-import { debounce, throttle } from "lodash-es";
+import { debounce, throttle, uniq, flattenDeep } from "lodash-es";
 import { kebabCase } from "change-case";
 import { toggles } from "./config.js";
 
@@ -69,6 +69,8 @@ class BetterAzureBoards {
       this.activateCopyNumberToClipboard.bind(this),
       1000,
     );
+
+    this.debouncedEmbedFigma = debounce(this.embedFigma.bind(this), 1000);
 
     this.setUpMutationObservers();
     this.init();
@@ -209,6 +211,17 @@ class BetterAzureBoards {
         }
         this.throttledActivateShowParentAsBreadcrumbs(target);
         this.throttledActivateCopyNumberToClipboard(target);
+
+        if (target.closest(".bab-figma-embeds")) {
+          return;
+        }
+
+        if (!this.userOptions.embedFigma) {
+          logger.debug("embedFigma option is disabled");
+          return;
+        }
+
+        this.debouncedEmbedFigma();
       });
     });
 
@@ -492,12 +505,73 @@ class BetterAzureBoards {
     );
   }
 
-  openOptionsPage() {
-    if (chrome.runtime.openOptionsPage) {
-      chrome.runtime.openOptionsPage();
-    } else {
-      window.open(chrome.runtime.getURL("options.html"));
+  embedFigma() {
+    if (!this.userOptions.embedFigma) {
+      logger.debug("embedFigma option is disabled");
+      return;
     }
+
+    document
+      .querySelectorAll(
+        ".work-item-form-collapsible-section-content .rooster-editor:not(.edit-mode)",
+      )
+      .forEach((editor) => {
+        let figmas = uniq(
+          flattenDeep([
+            ...editor.innerText.matchAll(
+              /(http.+figma\.com\/[file|design][^\s<>]+\?[^\s<>]+)/g,
+            ),
+          ]),
+        );
+
+        figmas = figmas.map((url) =>
+          url.replace("www.figma.com", "embed.figma.com"),
+        );
+
+        if (figmas.length === 0) {
+          return;
+        }
+
+        logger.debug("Found Figma URLs:", figmas);
+
+        const embedsContainer = editor
+          .closest(".work-item-form-collapsible-section-content")
+          .querySelector(".bab-figma-embeds");
+
+        if (!embedsContainer) {
+          const container = document.createElement("div");
+          container.classList.add("bab-figma-embeds");
+          editor
+            .closest(".work-item-form-collapsible-section-content")
+            .appendChild(container);
+        }
+
+        figmas.forEach((url) => {
+          const src = new URL(url);
+          src.searchParams.set("embed-host", "azureboards");
+          if (
+            !editor
+              .closest(".work-item-form-collapsible-section-content")
+              .querySelector(
+                `.bab-figma-embeds iframe[src="${src.toString()}"]`,
+              )
+          ) {
+            const iframe = document.createElement("iframe");
+            iframe.src = src.toString();
+            iframe.style.width = "100%";
+            iframe.style.height = "500px";
+            iframe.style.border = "1px solid #ccc";
+            iframe.style.borderRadius = "4px";
+            iframe.style.marginTop = "16px";
+            editor
+              .closest(".work-item-form-collapsible-section-content")
+              .querySelector(".bab-figma-embeds")
+              .appendChild(iframe);
+          } else {
+            logger.debug("Figma embed already exists for URL:", url);
+          }
+        });
+      });
   }
 }
 

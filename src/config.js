@@ -6,6 +6,7 @@ const toggles = [
   "showParentAsBreadcrumbs",
   "moreProminentStateOnCards",
   "copyNumberToClipboard",
+  "embedFigma",
 ];
 
 export { toggles };
