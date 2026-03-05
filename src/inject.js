@@ -73,7 +73,6 @@ class BetterAzureBoards {
     this.setUpMutationObservers();
     this.init();
     this.initToast();
-    this.addInfoBox();
 
     this.eventsAdded = {};
   }
@@ -222,30 +221,6 @@ class BetterAzureBoards {
         }
       });
     });
-  }
-
-  addInfoBox() {
-    const infoBox = document.createElement("div");
-    infoBox.classList.add("bab-info-box");
-    infoBox.innerHTML = `
-      <div class="bab-info-box__content">
-        <p class="bolt-dropdown-expandable-button-label">🪄 This webpage is enhanced by Better Azure Boards Chrome Extension</p>
-        <button class="bolt-button" id="bab-go-to-options">Go to options &amp; info</button>
-      </div>
-    `;
-
-    infoBox.addEventListener("click", () =>
-      infoBox.classList.toggle("bab-info-box--mini"),
-    );
-    const optionsButton = infoBox.querySelector("#bab-go-to-options");
-    if (optionsButton) {
-      optionsButton.addEventListener("click", () => this.openOptionsPage());
-    }
-    document.body.appendChild(infoBox);
-
-    setTimeout(() => {
-      infoBox.classList.add("bab-info-box--mini");
-    }, 2000);
   }
 
   autoSave() {

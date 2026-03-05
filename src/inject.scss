@@ -195,41 +195,6 @@ html {
   }
 }
 
-.bab-info-box {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  z-index: 10000;
-  padding: 12px;
-  padding-top: 0;
-
-  background: var(--background-color, rgba(255, 255, 255, 1));
-
-  box-shadow: 0 0 6px var(--palette-black-alpha-10, rgba(0, 0, 0, 0.1));
-  max-width: 300px;
-
-  &--mini {
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-    cursor: pointer;
-
-    &:after {
-      content: "⚙️";
-      font-size: 20px;
-      line-height: 1;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    .bab-info-box__content {
-      display: none;
-    }
-  }
-}
-
 html {
   [bab-better-copy-to-clipboard="true"]:where(.wit-card .selectable-text),
   [bab-better-copy-to-clipboard-parent] [bab-better-copy-to-clipboard="true"] {
