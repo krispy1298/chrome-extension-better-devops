@@ -466,7 +466,6 @@ class BetterAzureBoards {
         ".work-item-form-header .work-item-title-textfield, .artifact-link .artifact-link-id",
       )
       .forEach((elem) => {
-        debugger;
         const header = elem.closest(".work-item-form-header, .artifact-link");
 
         if (

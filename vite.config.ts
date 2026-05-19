@@ -12,10 +12,10 @@ function generateManifest() {
   const manifest = readJsonFile("manifest.json");
   const pkg = readJsonFile("package.json");
   return {
+    ...manifest,
     name: pkg.name,
     description: pkg.description,
     version: pkg.version,
-    ...manifest,
   };
 }
 
