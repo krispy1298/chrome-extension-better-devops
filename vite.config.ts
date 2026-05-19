@@ -20,12 +20,15 @@ function generateManifest() {
 export default defineConfig({
   build: {
     minify: process.env.CI ? 'terser' : false,
+    watch: {
+      include: ["src/**", "manifest.json", "package.json"],
+    }
   },
   plugins: [
     webExtension({
       browser: process.env.TARGET || "chrome",
       manifest: generateManifest,
-      watchFilePaths: ["package.json", "manifest.json"],
+      watchFilePaths: ["src/**", "manifest.json", "package.json"],
       webExtConfig: {
         startUrl: process.env.START_URL?.split(',') || ["https://dev.azure.com/organization/project/_workitems/recentlyupdated/"],
       },
