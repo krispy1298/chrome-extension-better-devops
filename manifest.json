@@ -1,0 +1,25 @@
+{
+  "name": "Better Azure Boards",
+  "version": "1.1.2",
+  "manifest_version": 3,
+  "description": "A Chrome Extension to have a better experience in Azure Boards",
+  "content_scripts": [
+    {
+      "matches": ["https://*.visualstudio.com/*"],
+      "css": ["src/inject.scss"],
+      "js": ["src/inject.js"]
+    }
+  ],
+  "{{chrome}}.action": {
+    "default_popup": "src/popup.html"
+  },
+  "{{firefox}}.browser_action": {
+    "default_popup": "src/popup.html"
+  },
+  "background": {
+    "{{chrome}}.service_worker": "src/service-worker.js",
+    "{{firefox}}.scripts": ["src/service-worker.js"]
+  },
+  "options_page": "src/options.html",
+  "permissions": ["storage"]
+}

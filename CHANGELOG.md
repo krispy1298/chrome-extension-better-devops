@@ -5,6 +5,17 @@ All notable changes to the Better Azure Boards Chrome Extension will be document
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2026-03-05
+
+### Added
+
+- Autosave compatibility with removing tags
+
+### Changed
+
+- Better "Copy to Clipboard" hover state
+- Moved to [Vite](https://vite-plugin-web-extension.aklinker1.io/) for internal development
+
 ## [1.1.1] - 2026-03-05
 
 ### Added
