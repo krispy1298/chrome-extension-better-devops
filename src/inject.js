@@ -237,30 +237,32 @@ class BetterAzureBoards {
   }
 
   autoSave() {
-    const buttons = document.querySelectorAll(
-      "#__bolt-save-dialog, #__bolt-save",
-    );
-
-    buttons.forEach((button) => {
-      if (button.innerText === "Save") {
-        button.click();
-        button.setAttribute("bab-better-autosaved", "");
-        setTimeout(() => {
-          button.removeAttribute("bab-better-autosaved");
-        }, 1500);
-        return;
-      }
-
-      const toggle = document.querySelector(
-        "[aria-label='More save options'].enabled",
+    setTimeout(() => {
+      const buttons = document.querySelectorAll(
+        "#__bolt-save-dialog, #__bolt-save",
       );
 
-      if (toggle) {
-        toggle.click();
-        const save = document.getElementById("__bolt-save");
-        save.click();
-      }
-    });
+      buttons.forEach((button) => {
+        if (button.innerText === "Save") {
+          button.click();
+          button.setAttribute("bab-better-autosaved", "");
+          setTimeout(() => {
+            button.removeAttribute("bab-better-autosaved");
+          }, 1500);
+          return;
+        }
+
+        const toggle = document.querySelector(
+          "[aria-label='More save options'].enabled",
+        );
+
+        if (toggle) {
+          toggle.click();
+          const save = document.getElementById("__bolt-save");
+          save.click();
+        }
+      });
+    }, 250);
   }
 
   activateShowParentAsBreadcrumbs(target = document) {
@@ -289,6 +291,11 @@ class BetterAzureBoards {
           linkClone.classList.add("bab-better-parent-link");
           linkClone.classList.remove("padding-bottom-8");
           linkClone.style.maxWidth = "30%";
+          linkClone
+            .querySelectorAll("[bab-better-copy-to-clipboard]")
+            .forEach((elem) => {
+              elem.removeAttribute("bab-better-copy-to-clipboard");
+            });
           header.querySelector(".secondary-text").prepend(linkClone);
         }
       }
@@ -373,8 +380,14 @@ class BetterAzureBoards {
     );
 
     containers.forEach((container) => {
+      const selectors = [
+        "#__bolt-Stat-e-input",
+        ".bolt-dropdown-expandable-textfield-input",
+        ".rooster-editor",
+        ".work-item-attachments-grid",
+      ];
       const elements = container.querySelectorAll(
-        "#__bolt-Stat-e-input:not(.bab-better-autosave), .bolt-dropdown-expandable-textfield-input:not(.bab-better-autosave), .rooster-editor:not(.bab-better-autosave), .work-item-attachments-grid:not(.bab-better-autosave)",
+        selectors.map((s) => `${s}:not(.bab-better-autosave)`).join(", "),
       );
 
       elements.forEach((elem) => {
@@ -397,6 +410,21 @@ class BetterAzureBoards {
       textFields.forEach((field) => {
         field.classList.add("bab-better-autosave");
         field.addEventListener("blur", () => {
+          this.throttledAutoSave();
+        });
+      });
+
+      const buttonSelectors = [
+        ".bolt-pill.has-remove-button .bolt-pill-button",
+      ];
+
+      const buttons = container.querySelectorAll(
+        buttonSelectors.map((s) => `${s}:not(.bab-better-autosave)`).join(", "),
+      );
+
+      buttons.forEach((button) => {
+        button.classList.add("bab-better-autosave");
+        button.addEventListener("click", () => {
           this.throttledAutoSave();
         });
       });
@@ -433,12 +461,15 @@ class BetterAzureBoards {
     }
 
     target
-      .querySelectorAll(".work-item-form-header .work-item-title-textfield")
+      .querySelectorAll(
+        ".work-item-form-header .work-item-title-textfield, .artifact-link .artifact-link-id",
+      )
       .forEach((elem) => {
-        const header = elem.closest(".work-item-form-header");
+        debugger;
+        const header = elem.closest(".work-item-form-header, .artifact-link");
 
         if (
-          header.getAttribute("bab-better-copy-to-clipboard-parent") === "true"
+          header?.getAttribute("bab-better-copy-to-clipboard-parent") === "true"
         ) {
           return;
         }
@@ -462,17 +493,19 @@ class BetterAzureBoards {
         }
       });
 
-    target.querySelectorAll(".wit-card .selectable-text").forEach((elem) => {
-      if (elem.getAttribute("bab-better-copy-to-clipboard") === "true") {
-        return;
-      }
+    target
+      .querySelectorAll(".wit-card .selectable-text, .artifact-link-id")
+      .forEach((elem) => {
+        if (elem.getAttribute("bab-better-copy-to-clipboard") === "true") {
+          return;
+        }
 
-      elem.setAttribute("bab-better-copy-to-clipboard", "true");
-      elem.addEventListener(
-        "click",
-        this.onCopyNumberToClipboardClick.bind(this),
-      );
-    });
+        elem.setAttribute("bab-better-copy-to-clipboard", "true");
+        elem.addEventListener(
+          "click",
+          this.onCopyNumberToClipboardClick.bind(this),
+        );
+      });
   }
 
   onCopyNumberToClipboardClick(event) {
