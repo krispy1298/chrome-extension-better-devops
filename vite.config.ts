@@ -3,6 +3,8 @@ import strip from "@rollup/plugin-strip";
 import { defineConfig } from "vite";
 import webExtension, { readJsonFile } from "vite-plugin-web-extension";
 import dotenv from "dotenv";
+import replace from "@rollup/plugin-replace";
+import markdown from "@wcj/markdown-to-html";
 
 dotenv.config();
 
@@ -19,20 +21,32 @@ function generateManifest() {
 
 export default defineConfig(({ command }) => ({
   build: {
-    minify: command === 'build' ? 'terser' : false,
-    watch: command === 'build' ? undefined : {
-      include: ["src/**", "manifest.json", "package.json"],
-    }
+    minify: command === "build" ? "terser" : false,
+    watch:
+      command === "build"
+        ? undefined
+        : {
+            include: ["src/**", "manifest.json", "package.json"],
+          },
   },
   plugins: [
+    replace({
+      values: {
+        "process.env.VERSION_NUMBER":
+          process.env.VERSION_NUMBER || process.env.npm_package_version,
+        "process.env.UPDATE_NOTES": markdown(process.env.UPDATE_NOTES || ""),
+      },
+    }),
     webExtension({
       browser: process.env.TARGET || "chrome",
       manifest: generateManifest,
       watchFilePaths: ["src/**", "manifest.json", "package.json"],
       webExtConfig: {
-        startUrl: process.env.START_URL?.split(',') || ["https://dev.azure.com/organization/project/_workitems/recentlyupdated/"],
+        startUrl: process.env.START_URL?.split(",") || [
+          "https://dev.azure.com/organization/project/_workitems/recentlyupdated/",
+        ],
       },
     }),
-    ...(command === 'build' ? [strip(), minify()] : []),
+    ...(command === "build" ? [strip(), minify()] : []),
   ],
 }));
