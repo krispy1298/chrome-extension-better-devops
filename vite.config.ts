@@ -17,10 +17,10 @@ function generateManifest() {
   };
 }
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   build: {
-    minify: process.env.CI ? 'terser' : false,
-    watch: {
+    minify: command === 'build' ? 'terser' : false,
+    watch: command === 'build' ? undefined : {
       include: ["src/**", "manifest.json", "package.json"],
     }
   },
@@ -33,6 +33,6 @@ export default defineConfig({
         startUrl: process.env.START_URL?.split(',') || ["https://dev.azure.com/organization/project/_workitems/recentlyupdated/"],
       },
     }),
-    ...(process.env.BUILD_MODE == "production" ? [strip(), minify()] : []),
+    ...(command === 'build' ? [strip(), minify()] : []),
   ],
-});
+}));
