@@ -86,6 +86,7 @@ class BetterAzureBoards {
       options[toggle] = true;
     });
 
+    // TODO: firefox?
     chrome.storage.sync.get(options, (items) => {
       toggles.forEach((toggle) => {
         if (items[toggle]) {
