@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.3] - 2026-08-17
 
-### Added
+### Fixed
 
-- Account for markdown comment in non-scrolling textareas
+- Account for markdown comments in non-scrolling textareas
 
 ## [1.1.2] - 2026-03-05
 
