@@ -31,6 +31,7 @@ export default defineConfig(({ command }) => ({
   },
   plugins: [
     replace({
+      preventAssignment: true,
       values: {
         "process.env.VERSION_NUMBER":
           process.env.VERSION_NUMBER || process.env.npm_package_version,

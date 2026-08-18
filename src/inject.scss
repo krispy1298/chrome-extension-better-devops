@@ -189,7 +189,8 @@ html {
 .bab {
   &-no-scroll-bar-on-text-areas-enabled {
     .html-editor.auto-grow .rooster-wrapper,
-    .html-editor.auto-grow .rooster-wrapper .rooster-editor {
+    .html-editor.auto-grow .rooster-wrapper .rooster-editor,
+    .work-item-form-control-content.limited-height {
       max-height: none !important;
     }
   }

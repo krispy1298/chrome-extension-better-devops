@@ -260,7 +260,9 @@ class BetterAzureBoards {
         if (toggle) {
           toggle.click();
           const save = document.getElementById("__bolt-save");
-          save.click();
+          if (save) {
+            save.click();
+          }
         }
       });
     }, 250);
